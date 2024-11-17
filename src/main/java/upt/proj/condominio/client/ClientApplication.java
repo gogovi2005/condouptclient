@@ -5,5 +5,6 @@ import org.springframework.web.client.RestTemplate;
 import upt.proj.condominio.model.Conta;
 
 public class ClientApplication {
+	Conta user = new Conta()
 
 }
