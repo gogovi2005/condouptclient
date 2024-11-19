@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import upt.proj.condominio.model.Conta;
+import upt.proj.condominio.model.DonoPredio;
+import upt.proj.condominio.model.Empresa;
+import upt.proj.condominio.model.User;
 
 @Service
 public class ContaClientService {
@@ -20,6 +23,21 @@ public class ContaClientService {
     public Conta getContaByUsername(String username) {
         String url = BASE_URL + "/username/" + username;
         return restTemplate.getForObject(url, Conta.class);
+    }
+
+    public DonoPredio getDonoPredioByUsername(String username) {
+        String url = BASE_URL + "/username/" + username;
+        return restTemplate.getForObject(url, DonoPredio.class);
+    }
+
+    public User getUserByUsername(String username) {
+        String url = BASE_URL + "/username/" + username;
+        return restTemplate.getForObject(url, User.class);
+    }
+
+    public Empresa getEmpresaByUsername(String username) {
+        String url = BASE_URL + "/username/" + username;
+        return restTemplate.getForObject(url, Empresa.class);
     }
 
     public Conta getContaByEmail(String email) {
