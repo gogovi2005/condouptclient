@@ -3,7 +3,7 @@ package upt.proj.condominio.client.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import upt.proj.condominio.model.Apartamento;
+
 import upt.proj.condominio.model.Predio;
 
 @Service
@@ -18,11 +18,5 @@ public class PredioClientService {
     public Predio getPredioByNome(String nome) {
         String url = BASE_URL + "/predio/" + nome;
         return restTemplate.getForObject(url, Predio.class); 
-    }
-
-    
-    public void addApartamentoToPredio(Long predioId, Apartamento apartamento) {
-        String url = BASE_URL + "/" + predioId + "/apartamentos";
-        restTemplate.postForObject(url, apartamento, Void.class); 
     }
 }

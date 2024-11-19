@@ -1,15 +1,13 @@
 package upt.proj.condominio.client.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import upt.proj.condominio.model.User;
-import upt.proj.condominio.model.Empresa;
-import upt.proj.condominio.model.DonoPredio;
-import upt.proj.condominio.model.Conta;
 
-import java.util.HashMap;
-import java.util.Map;
+import upt.proj.condominio.model.Conta;
 
 @Service
 public class ContaClientService {
