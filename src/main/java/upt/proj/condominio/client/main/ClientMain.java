@@ -4,14 +4,13 @@ package upt.proj.condominio.client.main;
 import java.util.List;
 import java.util.Scanner;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import upt.proj.condominio.client.config.AppConfig;
-import upt.proj.condominio.client.service.ContaClientService;
-import upt.proj.condominio.client.service.PredioClientService;
 import upt.proj.condominio.client.service.ApartamentoClientService;
+import upt.proj.condominio.client.service.ContaClientService;
 import upt.proj.condominio.client.service.GastosClientService;
+import upt.proj.condominio.client.service.PredioClientService;
 import upt.proj.condominio.model.Apartamento;
 import upt.proj.condominio.model.Conta;
 import upt.proj.condominio.model.Gastos;
@@ -436,7 +435,7 @@ public class ClientMain {
 	public static void createGasto(Conta user, Integer ano, Integer mes, Float agua, Float gas, Float eletricidade) { //FEITO
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		GastosClientService gastosClientService = context.getBean(GastosClientService.class);
-		gastosClientService.createGasto(user.getId(), ano, mes, agua, gas, eletricidade);
+		gastosClientService.createGastos(user.getId(), mes, ano, agua, gas, eletricidade);
 		context.close();
 	}
 
