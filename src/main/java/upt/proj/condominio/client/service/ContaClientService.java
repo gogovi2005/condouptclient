@@ -28,7 +28,7 @@ public class ContaClientService {
         String url = BASE_URL + "/email/" + email;
         return restTemplate.getForObject(url, Conta.class);
     }
-
+    
     public void createUser(String username,String email,String password,Integer idade) {
         String url = BASE_URL;
         Map<String,Object> map = new HashMap<>();
@@ -41,14 +41,14 @@ public class ContaClientService {
         try {
             restTemplate.postForObject(url,map,Void.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); }
 
     }
 
     public void createDonoP(String username,String email,String password,Integer idade) {
         String url = BASE_URL;
         Map<String,Object> map = new HashMap<>();
-        map.put("tipo","Morador");
+        map.put("tipo","DonoPredio");
         map.put("username",username);
         map.put("email",email);
         map.put("password",password);
@@ -57,28 +57,24 @@ public class ContaClientService {
         try {
             restTemplate.postForObject(url,map,Void.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace();}
 
     }
 
-    public void createEmpresa(String username,String email,String password,Integer idade) {
+    public void createEmpresa(String username,String email,String password,String tiposervice, String zona, float preco) {
         String url = BASE_URL;
         Map<String,Object> map = new HashMap<>();
-        map.put("tipo","Morador");
+        map.put("tipo","Empresa");
         map.put("username",username);
         map.put("email",email);
-        map.put("password",password);
-        map.put("idade",idade);
+        map.put("tipo_de_serviços",tiposervice);
+        map.put("zona",zona);
+        map.put("preco",preco);
 
         try {
             restTemplate.postForObject(url,map,Void.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); }
 
+        }
     }
-
-
-
-
-
-}
