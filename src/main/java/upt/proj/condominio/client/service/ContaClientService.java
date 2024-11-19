@@ -58,7 +58,6 @@ public class ContaClientService {
             restTemplate.postForObject(url,map,Void.class);
         } catch (Exception e) {
             e.printStackTrace();}
-
     }
 
     public void createEmpresa(String username,String email,String password,String tiposervice, String zona, float preco) {
