@@ -13,8 +13,11 @@ import upt.proj.condominio.client.service.GastosClientService;
 import upt.proj.condominio.client.service.PredioClientService;
 import upt.proj.condominio.model.Apartamento;
 import upt.proj.condominio.model.Conta;
+import upt.proj.condominio.model.DonoPredio;
+import upt.proj.condominio.model.Empresa;
 import upt.proj.condominio.model.Gastos;
 import upt.proj.condominio.model.Predio;
+import upt.proj.condominio.model.User;
 import verificacoes.Checks;
 
 public class ClientMain {
@@ -265,6 +268,31 @@ public class ClientMain {
 		return conta;
 	}
 
+	public static DonoPredio readDonoPredio(String username) { //FEITO
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+		ContaClientService contaClientService = context.getBean(ContaClientService.class);
+		DonoPredio donoPredio = contaClientService.getDonoPredioByUsername(username);
+		context.close();
+		return donoPredio;
+	}
+
+	public static User readUser(String username) { //FEITO
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+		ContaClientService contaClientService = context.getBean(ContaClientService.class);
+		User user = contaClientService.getUserByUsername(username);
+		context.close();
+		return user;
+	}
+
+	public static Empresa readEmpresa(String username) { //FEITO
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+		ContaClientService contaClientService = context.getBean(ContaClientService.class);
+		Empresa empresa = contaClientService.getEmpresaByUsername(username);
+		context.close();
+		return empresa;
+	}
+
+
 	public static Conta readEmail(String email) { //FEITO
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		ContaClientService contaClientService = context.getBean(ContaClientService.class);
@@ -309,7 +337,7 @@ public class ClientMain {
 	}
 
 	public static void UI_DonoPredio(Conta user) { 
-		user = readConta(user.getUsername());
+		user = readDonoPredio(user.getUsername());
 		Scanner sc = new Scanner(System.in);
 		System.out.println("1- Registar predio\n2- Ver os seus predios\n3- Ver apartamentos no seu predio\n4- Sair");
 		String resp;
@@ -327,7 +355,7 @@ public class ClientMain {
 	}
 
 	public static void UI_User(Conta user) { 
-		user = readConta(user.getUsername());
+		user = readUser(user.getUsername());
 		Scanner sc = new Scanner(System.in);
 		System.out.println("1- Registar gastos\n2- Ver gastos\n3- Registar Apartamento \n4- Sair");
 		String resp;
