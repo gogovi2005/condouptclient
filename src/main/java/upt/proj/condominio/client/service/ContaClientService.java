@@ -58,7 +58,7 @@ public class ContaClientService {
             e.printStackTrace();}
     }
 
-    public void createEmpresa(String username,String email,String password,String tiposervice, String zona, float preco) {
+    public void createEmpresa(String username,String email,String password,String tiposervice, String zona, Float preco) {
         String url = BASE_URL;
         Map<String,Object> map = new HashMap<>();
         map.put("tipo","Empresa");
@@ -73,6 +73,5 @@ public class ContaClientService {
             restTemplate.postForObject(url,map,Void.class);
         } catch (Exception e) {
             e.printStackTrace(); }
-        }
-    
+        } 
     }
