@@ -74,6 +74,5 @@ public class ContaClientService {
             restTemplate.postForObject(url,map,Void.class);
         } catch (Exception e) {
             e.printStackTrace(); }
-
         }
     }
