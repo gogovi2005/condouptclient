@@ -1,12 +1,13 @@
 package upt.proj.condominio.client.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import upt.proj.condominio.model.Gastos;
 
-import java.util.HashMap;
-import java.util.Map;
+import upt.proj.condominio.model.Gastos;
 
 @Service
 public class GastosClientService {
@@ -31,7 +32,6 @@ public class GastosClientService {
         map.put("eletricidade",eletricidade);
         map.put("userId",userId);
         
-
         try {
             restTemplate.postForObject(url,map,Void.class);
         } catch (Exception e) {

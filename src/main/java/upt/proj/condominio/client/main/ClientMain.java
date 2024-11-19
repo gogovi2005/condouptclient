@@ -10,6 +10,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import upt.proj.condominio.client.config.AppConfig;
 import upt.proj.condominio.client.service.ContaClientService;
 import upt.proj.condominio.client.service.PredioClientService;
+import upt.proj.condominio.client.service.ApartamentoClientService;
+import upt.proj.condominio.client.service.GastosClientService;
 import upt.proj.condominio.model.Apartamento;
 import upt.proj.condominio.model.Conta;
 import upt.proj.condominio.model.Gastos;
@@ -310,7 +312,7 @@ public class ClientMain {
 	
 	}
 
-	public static void UI_DonoPredio(Conta user) {
+	public static void UI_DonoPredio(Conta user) { //feito?
 		Scanner sc = new Scanner(System.in);
 		System.out.println("1- Registar predio\n2- Ver os seus predios\n3- Ver apartamentos no seu predio\n4- Sair");
 		String resp;
@@ -327,7 +329,7 @@ public class ClientMain {
 		sc.close();
 	}
 
-	public static void UI_User(Conta user) { //FALTA
+	public static void UI_User(Conta user) { //FEITO
 		Scanner sc = new Scanner(System.in);
 		System.out.println("1- Registar gastos\n2- Ver gastos\n3- Registar Apartamento \n4- Sair");
 		String resp;
@@ -550,5 +552,92 @@ public class ClientMain {
 		apartamentoClientService.createApartamento(user.getUsername(), predio.getId(), tamanho, garagem, nResidentes, wc, andar, fracao, nApartamento);
 		context.close();
 
+	}
+
+	public static void lerApartamentos(Conta user) {
+		for (Predio predio : user.getPredios()) {
+			System.out.println("<----------------------------->");
+			System.out.println("Apartamentos de " + predio.getNomeP() + ":");
+			if (predio.getApartamentos().isEmpty()) {
+				System.out.println("Não existem apartamentos no Predio "+predio.getNomeP()+".");
+			} else {
+				for (Apartamento apartamento : predio.getApartamentos()) {
+					System.out.println("<--------------->");
+					System.out.println(apartamento.toString());
+				}
+			}
+		}
+	}
+
+	public static void lerPredios(Conta user) {
+		System.out.println("Predios de " + user.getUsername() + ":");
+		for (Predio predio : user.getPredios()) {
+			System.out.println("<--------------->");
+			System.out.println(predio.toString());
+		}
+	}
+
+	public static void registarPredio(Conta user) {
+		Scanner sc = new Scanner(System.in);
+		String nomeP;
+		do {
+		   System.out.println("Digite o nome do prédio: ");
+		   nomeP = sc.nextLine();
+		    if (readNomePredio(nomeP) != null) {
+			    System.out.println("Nome de prédio já existente.");
+				nomeP = "";
+		    }
+		} while (nomeP.equals("") || (nomeP.indexOf(" ") == 0));
+
+		String zona;
+		do {
+		   System.out.println("Digite a zona do prédio: ");
+		   zona = sc.nextLine();
+		} while (zona.equals("") || (zona.indexOf(" ") == 0));
+	   
+		System.out.println("Permite animais? (S/N) ");
+		   String resposta = sc.nextLine();
+		   while (!resposta.equalsIgnoreCase("S") && !resposta.equalsIgnoreCase("N")) {
+			   System.out.println("Digite N ou S");
+			   resposta = sc.nextLine();
+			   } 
+		   boolean animaisP = true;
+		   if(resposta.equalsIgnoreCase("N")) {
+			   animaisP = false;
+		   }
+		   
+		   System.out.println("Digite o nº de andares do prédio: ");
+			String 	andaresNumStr;
+			Integer andaresNum = null;
+			do {
+				andaresNumStr = sc.nextLine();
+				if (Checks.SeInteger(andaresNumStr)) {
+					andaresNum = Integer.parseInt(andaresNumStr);
+				}	else {
+					System.out.println("Por favor insira um número inteiro.");
+				}
+			}while(!Checks.SeInteger(andaresNumStr) || andaresNumStr == null);
+			System.out.println("Digite o nº de apartamentos por andar: ");
+			String 	andaresporPisoStr;
+			Integer andarespPisoNum = null;
+			do {
+				andaresporPisoStr = sc.nextLine();
+				if (Checks.SeInteger(andaresporPisoStr)) {
+					andaresNum = Integer.parseInt(andaresporPisoStr);
+				}	else {
+					System.out.println("Por favor insira um número inteiro.");
+				}
+			}while(!Checks.SeInteger(andaresporPisoStr) || andaresporPisoStr == null);
+		    Integer ntotalapart = andaresNum * andarespPisoNum;
+
+			createPredio(user,nomeP,zona,ntotalapart, animaisP);
+			sc.close();
+	}
+
+	public static void createPredio(Conta user,String nomeP, String zona, Integer ntotalapart, Boolean animaisP) {
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+		PredioClientService predioClientService = context.getBean(PredioClientService.class);
+		predioClientService.createPredio(user.getId(),nomeP, zona, ntotalapart, animaisP);
+		context.close();
 	}
 }
