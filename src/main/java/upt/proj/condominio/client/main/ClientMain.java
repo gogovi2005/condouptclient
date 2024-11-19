@@ -36,7 +36,7 @@ public class ClientMain {
             }
         } while (!resp.equals("3"));
         context.close();
-
+		sc.close();
 	}
 
 
@@ -61,8 +61,6 @@ public class ClientMain {
 				password = sc.nextLine();
 				if (user.getPassword().equals(password)) {
 					System.out.println("Login efetuado com sucesso.");
-					System.out.println();
-					sc.close();
 					UI(user);
 				} else {
 					System.out.println("Password incorreta.");
@@ -70,7 +68,7 @@ public class ClientMain {
 			} while (!password.equals(user.getPassword()));
 		} else {
 			System.out.println("Utilizador nao encontrado.");
-			sc.close();
+			
 		}
 	}
 
@@ -325,7 +323,7 @@ public class ClientMain {
 					default : System.out.println("Opcao invalida...\n1- Registar predio\n2- Ver os seus predios\n3- Ver apartamentos no seu predio\n4- Sair"); break;
 				}
 		} while (!resp.equals("4"));
-		sc.close();
+		
 	}
 
 	public static void UI_User(Conta user) { //FEITO
@@ -342,7 +340,6 @@ public class ClientMain {
 					default : System.out.println("Opcao invalida...\n1- Registar gastos\n2- Ver gastos\n3- Registar Apartamento \n4- Sair"); break;
 				}
 		} while (!resp.equals("4"));
-		sc.close();
 	}
 
 	public static void UI_Empresa(Conta user) { //FEITO
@@ -417,7 +414,7 @@ public class ClientMain {
 			}
 		}while(!Checks.SeDouble(eletricidadeStr) || eletricidade == null);
 		createGasto(user, ano, mes, agua, gas, eletricidade);
-		sc.close();
+		
 	}
 
 	public static void LerGastos (Conta user) { //FEITO
@@ -630,7 +627,7 @@ public class ClientMain {
 		    Integer ntotalapart = andaresNum * andarespPisoNum;
 
 			createPredio(user,nomeP,zona,ntotalapart, animaisP);
-			sc.close();
+			
 	}
 
 	public static void createPredio(Conta user,String nomeP, String zona, Integer ntotalapart, Boolean animaisP) {
