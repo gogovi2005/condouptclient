@@ -67,8 +67,7 @@ public class ClientMain {
 				}
 			} while (!password.equals(user.getPassword()));
 		} else {
-			System.out.println("Utilizador nao encontrado.");
-			
+			System.out.println("Utilizador nao encontrado.");		
 		}
 	}
 
@@ -309,7 +308,8 @@ public class ClientMain {
 	
 	}
 
-	public static void UI_DonoPredio(Conta user) { //feito?
+	public static void UI_DonoPredio(Conta user) { 
+		user = readConta(user.getUsername());
 		Scanner sc = new Scanner(System.in);
 		System.out.println("1- Registar predio\n2- Ver os seus predios\n3- Ver apartamentos no seu predio\n4- Sair");
 		String resp;
@@ -326,7 +326,8 @@ public class ClientMain {
 		
 	}
 
-	public static void UI_User(Conta user) { //FEITO
+	public static void UI_User(Conta user) { 
+		user = readConta(user.getUsername());
 		Scanner sc = new Scanner(System.in);
 		System.out.println("1- Registar gastos\n2- Ver gastos\n3- Registar Apartamento \n4- Sair");
 		String resp;
