@@ -21,13 +21,27 @@ public class ClientMain {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
 		Scanner sc = new Scanner(System.in);
-		
-		CreateConta();
-        
-        sc.close();
+        String resp = "";
+        System.out.println("Bem vindo ao sistema de condominio");
+        System.out.println("Por favor faça login com o seu username ou email e password. Se nao tiver conta, por favor crie uma. \n 1- Login \n 2- Registar-se \n 3- Sair");
+        do {
+            resp = sc.nextLine();
+            switch (resp) {
+                case "1" : System.out.println("Login"); login(); break;
+                case "2" : System.out.println("Criar conta.."); CreateConta(); break;
+                case "3" : System.out.println("A sair..."); break;
+                default : System.out.println("Opcao invalida... \n 1- Login \n 2- Registar-se \n 3- Sair"); break;
+            }
+        } while (!resp.equals("3"));
         context.close();
 
 	}
+
+
+	public static void login() {
+
+	}
+
 
 	public static void CreateConta() {
 		Scanner sc = new Scanner(System.in);
