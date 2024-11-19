@@ -465,7 +465,7 @@ public class ClientMain {
 				   System.out.println("Digite S ou N");
 				   resposta = sc.nextLine();
 				   } 
-			   boolean garagem = true;
+			   Boolean garagem = true;
 			   if(resposta == "N") {
 				   garagem = false;
 			   }
@@ -596,7 +596,7 @@ public class ClientMain {
 		   while (!resposta.equalsIgnoreCase("S") && !resposta.equalsIgnoreCase("N")) {
 			   System.out.println("Digite N ou S");
 			   resposta = sc.nextLine();
-			   } 
+			   }
 		   boolean animaisP = true;
 		   if(resposta.equalsIgnoreCase("N")) {
 			   animaisP = false;
@@ -619,7 +619,7 @@ public class ClientMain {
 			do {
 				andaresporPisoStr = sc.nextLine();
 				if (Checks.SeInteger(andaresporPisoStr)) {
-					andaresNum = Integer.parseInt(andaresporPisoStr);
+					andarespPisoNum = Integer.parseInt(andaresporPisoStr);
 				}	else {
 					System.out.println("Por favor insira um número inteiro.");
 				}
