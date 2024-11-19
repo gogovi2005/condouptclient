@@ -12,11 +12,11 @@ public class PredioClientService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String BASE_URL = "http://localhost:8080/api/predios"; 
+    private static final String BASE_URL = "http://localhost:8080/api/predio"; 
 
     
     public Predio getPredioByNome(String nome) {
-        String url = BASE_URL + "/nome/" + nome;
+        String url = BASE_URL + "/predio/" + nome;
         return restTemplate.getForObject(url, Predio.class); 
     }
 
