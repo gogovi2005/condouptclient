@@ -66,7 +66,8 @@ public class ContaClientService {
         map.put("tipo","Empresa");
         map.put("username",username);
         map.put("email",email);
-        map.put("tipo_de_serviços",tiposervice);
+        map.put("password",password);
+        map.put("tiposervice",tiposervice);
         map.put("zona",zona);
         map.put("preco",preco);
 
