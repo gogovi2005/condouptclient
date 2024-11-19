@@ -12,6 +12,7 @@ import upt.proj.condominio.model.Conta;
 import upt.proj.condominio.model.DonoPredio;
 import upt.proj.condominio.model.Empresa;
 import upt.proj.condominio.model.Predio;
+import upt.proj.condominio.model.User;
 import verificacoes.Checks;
 
 public class ClientMain {
@@ -88,9 +89,7 @@ public class ClientMain {
 								}
 							}while(!Checks.SeInteger(idadeStr) || idade == null);
 
-							Conta conta = new DonoPredio(username, email, password, idade);
-
-		
+							createDonoP(username, email, password, idade);
 							ccriada = true;
 						}
 					break;
@@ -100,7 +99,7 @@ public class ClientMain {
 						do {
 							username = sc.nextLine();
 						} while (username.equals("") ||  (username.indexOf(" ") == 0));
-						if (readUsername(username) != null) {
+						if (readConta(username) != null) {
 							System.out.println("Nome de utilizador ja existente.");
 							break;
 						} else {
@@ -141,15 +140,9 @@ public class ClientMain {
 								} else {
 									System.out.println("Por favor insira um numero inteiro.");
 								}
-							}while(!Checks.SeInteger(idadeStr) || idade == null); 
+							}while(!Checks.SeInteger(idadeStr) || idade == null);
 	
-							Conta conta = new User(username, email, password, idade);
-							Session session = sessionFactory.openSession();
-							session = sessionFactory.openSession();
-							session.beginTransaction();
-							session.persist(conta);
-							session.getTransaction().commit();
-							session.close();
+							createUser(username, email, password, idade);
 							ccriada = true;
 						}
 						
@@ -160,7 +153,7 @@ public class ClientMain {
 					do {
 						username = sc.nextLine();
 					} while (username.equals("") ||  (username.indexOf(" ") == 0));
-					if (readUsername(username) != null) {
+					if (readConta(username) != null) {
 						System.out.println("Nome de utilizador ja existente.");
 						break;
 					} else {
@@ -205,14 +198,7 @@ public class ClientMain {
 							}
 						}while(!Checks.SeFloat(precoStr) || preco == null);
 	
-						Conta conta = new Empresa(username, email, password,tipo, zona, preco);
-						
-						Session session = sessionFactory.openSession();
-						session = sessionFactory.openSession();
-						session.beginTransaction();
-						session.persist(conta);
-						session.getTransaction().commit();
-						session.close();
+						createEmpresa(username, email, password, tipo, zona, preco);
 						ccriada = true;
 					}
                     break;
@@ -242,6 +228,27 @@ public class ClientMain {
 		Conta conta = contaClientService.getContaByEmail(email);
 		context.close();
 		return conta;
+	}
+
+	public static void createUser(String username,String email,String password,Integer idade) {
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+		ContaClientService contaClientService = context.getBean(ContaClientService.class);
+		contaClientService.createUser(username, email, password, idade);
+		context.close();
+	}
+
+	public static void createDonoP(String username,String email,String password,Integer idade) {
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+		ContaClientService contaClientService = context.getBean(ContaClientService.class);
+		contaClientService.createDonoP(username, email, password, idade);
+		context.close();
+	}
+
+	public static void createEmpresa(String username,String email,String password,String tiposervice,String zona,Float preco) {
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+		ContaClientService contaClientService = context.getBean(ContaClientService.class);
+		contaClientService.createEmpresa(username, email, password, tiposervice, zona, preco);
+		context.close();
 	}
 
 
