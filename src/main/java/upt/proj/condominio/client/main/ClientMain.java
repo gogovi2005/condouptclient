@@ -624,7 +624,7 @@ public class ClientMain {
 					System.out.println("Por favor insira um número inteiro.");
 				}
 			}while(!Checks.SeInteger(andaresporPisoStr) || andaresporPisoStr == null);
-		    Integer ntotalapart = andaresNum * andarespPisoNum;
+			Integer ntotalapart = (andaresNum != null && andarespPisoNum != null) ? andaresNum * andarespPisoNum : 0;
 
 			createPredio(user,nomeP,zona,ntotalapart, animaisP);
 			
