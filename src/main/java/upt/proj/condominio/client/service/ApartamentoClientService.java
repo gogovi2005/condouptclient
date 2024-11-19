@@ -38,5 +38,4 @@ public class ApartamentoClientService {
         } catch (Exception e) {
             e.printStackTrace(); }
     	}
-
     }
