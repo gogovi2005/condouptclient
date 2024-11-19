@@ -25,7 +25,7 @@ public class PredioClientService {
     public void createPredio(Integer donoPredId, String nomeP, String zona, Integer ntotalapart, Boolean animaisP) {
         String url = BASE_URL;
         Map<String,Object> map = new HashMap<>();
-        map.put("noneP", nomeP);
+        map.put("nomeP", nomeP);
         map.put("zona",zona);
         map.put("ntotalapart",ntotalapart);
         map.put("animaisP",animaisP);
