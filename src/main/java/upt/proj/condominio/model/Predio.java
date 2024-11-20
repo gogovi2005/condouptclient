@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Predios")
-@JsonIgnoreProperties({"apartamentos"})
+@JsonIgnoreProperties({"dono"})
 public class Predio {
 
 	@Id

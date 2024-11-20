@@ -1,6 +1,7 @@
 package upt.proj.condominio.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "apartamentos")
+@JsonIgnoreProperties({"ocupante"})
 public class Apartamento {
 	
 
@@ -180,7 +182,7 @@ public class Apartamento {
 
 	@Override
 	public String toString() {
-		return "Tamanho: " + tamanho + "\nGaragem: " + garagem + "\nNº de Residentes: " + nResidentes + "\nWC: " + wc + "\nAndar: " + andar + "\nFracao: " + fracao + "\nOcupante: " + ocupante + "\nNº do Apartamento: " + nApartamento;
+		return "Tamanho: " + tamanho + "\nGaragem: " + garagem + "\nNº de Residentes: " + nResidentes + "\nWC: " + wc + "\nAndar: " + andar + "\nFracao: " + fracao + "\nNº do Apartamento: " + nApartamento;
 	}
 
 }

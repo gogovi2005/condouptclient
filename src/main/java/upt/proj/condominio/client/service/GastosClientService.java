@@ -15,7 +15,7 @@ public class GastosClientService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String BASE_URL = "http://localhost:8080/api/apartamento";
+    private static final String BASE_URL = "http://localhost:8080/api/gastos";
 
     public Gastos getGastosByUsername(String username) {
         String url = BASE_URL + "/username/" + username;

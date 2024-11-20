@@ -15,7 +15,7 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("DonoPredio")
-@JsonIgnoreProperties({"predios"})
+
 public class DonoPredio extends Conta {
 
     @Column(name = "Idade", nullable = true)

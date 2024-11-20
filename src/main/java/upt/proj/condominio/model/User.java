@@ -3,13 +3,11 @@ package upt.proj.condominio.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.*;
 
 @Entity
 @DiscriminatorValue("Morador")
-@JsonIgnoreProperties({"gastos"})
+
 public class User extends Conta {
  
     @Column(name = "Idade", nullable = true)
