@@ -344,9 +344,9 @@ public class ClientMain {
 		do {
 			resp = sc.nextLine();
 				switch (resp) {
-					case "1" : registarPredio(user); break;
-					case "2" : lerPredios(user); break;
-					case "3" : lerApartamentos(user); break;
+					case "1" : registarPredio(user); user = readDonoPredio(user.getUsername()); break;
+					case "2" : lerPredios(user); user = readDonoPredio(user.getUsername()); break;
+					case "3" : lerApartamentos(user); user = readDonoPredio(user.getUsername()); break;
 					case "4" : System.out.println("A sair...");  break;
 					default : System.out.println("Opcao invalida...\n1- Registar predio\n2- Ver os seus predios\n3- Ver apartamentos no seu predio\n4- Sair"); break;
 				}
@@ -362,9 +362,9 @@ public class ClientMain {
 		do {
 			resp = sc.nextLine();
 				switch (resp) {
-					case "1" : RegistarGastos(user); break;
-					case "2" : LerGastos(user); break;
-					case "3" : criarApartamento(user);  break;
+					case "1" : RegistarGastos(user); user = readUser(user.getUsername()); break;
+					case "2" : LerGastos(user); user = readUser(user.getUsername()); break;
+					case "3" : criarApartamento(user); user = readUser(user.getUsername()); break;
 					case "4" : System.out.println("A sair..."); break;
 					default : System.out.println("Opcao invalida...\n1- Registar gastos\n2- Ver gastos\n3- Registar Apartamento \n4- Sair"); break;
 				}
