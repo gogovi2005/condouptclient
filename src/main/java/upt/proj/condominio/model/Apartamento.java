@@ -26,7 +26,7 @@ public class Apartamento {
 	@Column(name = "nApartamento", nullable = false)
 	private Integer nApartamento;
 
-	@Column(name = "Tamanho", nullable = false)
+	@Column(name = "Tipologia T(n)", nullable = false)
 	private Integer tamanho;
 
 	@Column(name = "Garagem", nullable = false)

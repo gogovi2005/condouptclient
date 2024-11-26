@@ -476,7 +476,7 @@ public class ClientMain {
 				System.out.println("Predio nao encontrado.");
 				
 			} else {
-				System.out.println("Digite o tamanho do apartamento: ");
+				System.out.println("Digite a tipologia T(n) do apartamento: ");
 				String 	tamanhoStr;
 				Integer tamanho = null;
 				do {
