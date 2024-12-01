@@ -356,6 +356,12 @@ public class ClientMain {
 
 	public static void UI_User(Conta user) { 
 		user = readUser(user.getUsername());
+		
+		Apartamento apartamento = readApartamento(user.getUsername());
+		if (apartamento != null) {
+			int residentes = apartamento.getnResidentes();
+		}
+		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("1- Registar gastos\n2- Ver gastos\n3- Registar Apartamento \n4- Sair");
 		String resp;
@@ -664,5 +670,12 @@ public class ClientMain {
 		PredioClientService predioClientService = context.getBean(PredioClientService.class);
 		predioClientService.createPredio(user.getId(),nomeP, zona, ntotalapart, animaisP);
 		context.close();
+	}
+	public static Apartamento readApartamento(String username) { 
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+		ApartamentoClientService apartamentoClientService = context.getBean(ApartamentoClientService.class);
+		Apartamento apartamento = ap«artamentoClientService.getApartamentoByUsername(username);
+		context.close();
+		return apartamento;
 	}
 }
