@@ -44,7 +44,7 @@ public class Apartamento {
 	@Column(name = "Fracao", nullable = false)
 	private Character fracao;
 
-	@Column(name = "Username_Ocupante", nullable = false)
+	@Column(name = "Username_Ocupante", nullable = true)
 	private String ocupante;
 
 	@Column(name = "Agua", nullable = false)
@@ -65,14 +65,14 @@ public class Apartamento {
 		//JPA constructor
 	}
 
-	public Apartamento(Integer tamanho, Boolean garagem, Integer nResidentes, Integer wc, Integer andar, Character fracao,String ocupante, Integer nApartamento) {
+	public Apartamento(Integer tamanho, Boolean garagem, Integer nResidentes, Integer wc, Integer andar, Character fracao, Integer nApartamento) {
 		this.tamanho = tamanho;
 		this.garagem = garagem;
 		this.nResidentes = nResidentes;
 		this.wc = wc;
 		this.andar = andar;
 		this.fracao = fracao;
-		this.ocupante = ocupante;
+		this.ocupante = null;
 		this.nApartamento = nApartamento;
 		this.agua = 0.0;
 		this.gas = 0.0;

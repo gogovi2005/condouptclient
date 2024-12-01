@@ -21,7 +21,7 @@ public class ApartamentoClientService {
         return restTemplate.getForObject(url, Apartamento.class);
     }
 
-    public void createApartamento(String ocupante, Integer predioId, Integer tamanho, Boolean garagem, Integer nResidentes, Integer wc, Integer andar, Character fracao, Integer nApartamento) {
+    public void createApartamento(Integer donoPredId, Integer predioId, Integer tamanho, Boolean garagem, Integer nResidentes, Integer wc, Integer andar, Character fracao, Integer nApartamento) {
         String url = BASE_URL;
         Map<String,Object> map = new HashMap<>();
         map.put("nApartamento",nApartamento);
@@ -31,7 +31,7 @@ public class ApartamentoClientService {
         map.put("wc",wc);
         map.put("andar",andar);
         map.put("fracao",fracao);
-        map.put("ocupante",ocupante);
+        map.put("donoApart",donoPredId);
         map.put("predioId",predioId);
         
 

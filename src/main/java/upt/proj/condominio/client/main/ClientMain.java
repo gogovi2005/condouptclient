@@ -339,15 +339,16 @@ public class ClientMain {
 	public static void UI_DonoPredio(Conta user) { 
 		user = readDonoPredio(user.getUsername());
 		Scanner sc = new Scanner(System.in);
-		System.out.println("1- Registar predio\n2- Ver os seus predios\n3- Ver apartamentos no seu predio\n4- Sair");
 		String resp;
 		do {
+		System.out.println("1- Registar predio\n2- Ver os seus predios\n3- Registar Apartamento\n4- Ver apartamentos no seu predio\n5- Sair");
 			resp = sc.nextLine();
 				switch (resp) {
 					case "1" : registarPredio(user); user = readDonoPredio(user.getUsername()); break;
 					case "2" : lerPredios(user); user = readDonoPredio(user.getUsername()); break;
-					case "3" : lerApartamentos(user); user = readDonoPredio(user.getUsername()); break;
-					case "4" : System.out.println("A sair...");  break;
+					case "3" : criarApartamento(user); user = readDonoPredio(user.getUsername()); break;
+					case "4" : lerApartamentos(user); user = readDonoPredio(user.getUsername()); break;
+					case "5" : System.out.println("A sair...");  break;
 					default : System.out.println("Opcao invalida...\n1- Registar predio\n2- Ver os seus predios\n3- Ver apartamentos no seu predio\n4- Sair"); break;
 				}
 		} while (!resp.equals("4"));
@@ -357,14 +358,14 @@ public class ClientMain {
 	public static void UI_User(Conta user) { 
 		user = readUser(user.getUsername());
 		Scanner sc = new Scanner(System.in);
-		System.out.println("1- Registar gastos\n2- Ver gastos\n3- Registar Apartamento \n4- Sair");
 		String resp;
 		do {
+		System.out.println("1- Registar gastos\n2- Ver gastos \n4- Sair");
 			resp = sc.nextLine();
 				switch (resp) {
 					case "1" : RegistarGastos(user); user = readUser(user.getUsername()); break;
 					case "2" : LerGastos(user); user = readUser(user.getUsername()); break;
-					case "3" : criarApartamento(user); user = readUser(user.getUsername()); break;
+
 					case "4" : System.out.println("A sair..."); break;
 					default : System.out.println("Opcao invalida...\n1- Registar gastos\n2- Ver gastos\n3- Registar Apartamento \n4- Sair"); break;
 				}
@@ -559,7 +560,7 @@ public class ClientMain {
 					}
 				}while(!Checks.SeInteger(nApartamentoStr) || nApartamento == null);
    
-			   createApartamento(user, predio,tamanho, garagem, nResidentes, wc, andar, fracao, nApartamento);
+			   createApartamento(user,predio,tamanho, garagem, nResidentes, wc, andar, fracao, nApartamento);
 			}
 	}
 
@@ -574,7 +575,7 @@ public class ClientMain {
 	public static void createApartamento(Conta user, Predio predio, Integer tamanho, Boolean garagem, Integer nResidentes, Integer wc, Integer andar, Character fracao, Integer nApartamento) { //FEITO
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		ApartamentoClientService apartamentoClientService = context.getBean(ApartamentoClientService.class);
-		apartamentoClientService.createApartamento(user.getUsername(), predio.getId(), tamanho, garagem, nResidentes, wc, andar, fracao, nApartamento);
+		apartamentoClientService.createApartamento(user.getId(),predio.getId(), tamanho, garagem, nResidentes, wc, andar, fracao, nApartamento);
 		context.close();
 
 	}
