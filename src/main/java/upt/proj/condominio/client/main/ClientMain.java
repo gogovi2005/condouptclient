@@ -358,8 +358,34 @@ public class ClientMain {
 		user = readUser(user.getUsername());
 		
 		Apartamento apartamento = readApartamento(user.getUsername());
+		Gastos gastos= (user.getGastos().get(user.getGastos().size()));
 		if (apartamento != null) {
 			int residentes = apartamento.getnResidentes();
+			double maxAgua = 3.3 * residentes;
+			double maxEletricidade = 113.25 * residentes;
+			double maxGas = 10 * residentes;
+			if(gastos.getAgua() < maxAgua) {
+				System.out.println("O valor de água está abaixo do valor máximo. Bom Trabalho.");
+			}else if (gastos.getAgua() == maxAgua) {
+				System.out.println("O valor de água é igual ao valor máximo. Tenha cuidado.");
+			}else {
+				System.out.println("O valor de água está a cima do valor máximo. Têm que o baixar urgentemente.")
+;			}
+			if(gastos.getEletricidade()< maxEletricidade) {
+				System.out.println("O valor de eletricidade está abaixo do valor máximo. Bom Trabalho.");
+			}else if (gastos.getEletricidade() == maxEletricidade) {
+				System.out.println("O valor de eletricidade é igual ao valor máximo. Tenha cuidado.");
+			}else {
+				System.out.println("O valor de eletricidade está a cima do valor máximo. Têm que o baixar urgentemente.")
+;			}
+			if(gastos.getGas()< maxGas) {
+				System.out.println("O valor de gás está abaixo do valor máximo. Bom Trabalho.");
+			}else if (gastos.getGas() == maxGas) {
+				System.out.println("O valor de gás é igual ao valor máximo. Tenha cuidado.");
+			}else {
+				System.out.println("O valor de gás está a cima do valor máximo. Têm que o baixar urgentemente.")
+;			}
+		
 		}
 		
 		Scanner sc = new Scanner(System.in);
@@ -409,7 +435,7 @@ public class ClientMain {
 				System.out.println("Por favor insira um numero inteiro.");
 			}
 		}while(!Checks.SeInteger(mesStr) || mes == null);
-		System.out.println("Quanto gasta de agua por mes?");
+		System.out.println("Quanto gasta de agua por mes(metros cubicos)?");
 		String aguaStr = null;
 		Float agua = null;
 		do {
@@ -422,7 +448,7 @@ public class ClientMain {
 				System.out.println("Por favor insira um numero.");
 			}
 		}while(!Checks.SeDouble(aguaStr) || agua == null);
-		System.out.println("Quanto gasta de gas por mes?");
+		System.out.println("Quanto gasta de gas por mes?(metros cubicos)");
 		String gasStr = null;
 		Float gas = null;
 		do {
@@ -435,7 +461,7 @@ public class ClientMain {
 				System.out.println("Por favor insira um numero.");
 			}
 		}while(!Checks.SeDouble(gasStr) || gas == null);
-		System.out.println("Quanto gasta de eletricidade por mes?");
+		System.out.println("Quanto gasta de eletricidade por mes?(Kilowhats)");
 		String eletricidadeStr = null;
 		Float eletricidade = null;
 		do {
@@ -674,7 +700,7 @@ public class ClientMain {
 	public static Apartamento readApartamento(String username) { 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		ApartamentoClientService apartamentoClientService = context.getBean(ApartamentoClientService.class);
-		Apartamento apartamento = ap«artamentoClientService.getApartamentoByUsername(username);
+		Apartamento apartamento = apartamentoClientService.getApartamentoByUsername(username);
 		context.close();
 		return apartamento;
 	}
