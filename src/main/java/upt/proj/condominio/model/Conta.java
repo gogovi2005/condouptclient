@@ -1,20 +1,14 @@
 package upt.proj.condominio.model;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.DiscriminatorType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "tipo")
 @JsonSubTypes({
@@ -42,6 +36,13 @@ public class Conta {
     @Column(name = "Password", nullable = false)
     private String password;
     
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Mensagens> mensagensEnviadas = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Mensagens> mensagensRecebidas = new ArrayList<>();
+
+
 
     public Conta() {
     //JPA constructor 
@@ -119,4 +120,21 @@ public class Conta {
     public List<Predio> getPredios() {
         return null;
     }
+
+    public void addMensagemEnviada(Mensagens mensagem) {
+        mensagensEnviadas.add(mensagem);
+    }
+
+    public void addMensagemRecebida(Mensagens mensagem) {
+        mensagensRecebidas.add(mensagem);
+    }
+
+    public List<Mensagens> getMensagensEnviadas() {
+        return mensagensEnviadas;
+    }
+
+    public List<Mensagens> getMensagensRecebidas() {
+        return mensagensRecebidas;
+    }
+
 }
