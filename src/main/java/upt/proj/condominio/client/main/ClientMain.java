@@ -674,7 +674,7 @@ public class ClientMain {
 	public static Apartamento readApartamento(String username) { 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		ApartamentoClientService apartamentoClientService = context.getBean(ApartamentoClientService.class);
-		Apartamento apartamento = apartamentoClientService.getApartamentoByUsername(username);
+		Apartamento apartamento = ap«artamentoClientService.getApartamentoByUsername(username);
 		context.close();
 		return apartamento;
 	}
