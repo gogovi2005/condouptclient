@@ -1,23 +1,15 @@
 package upt.proj.condominio.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "apartamentos")
-@JsonIgnoreProperties({"ocupante"})
 public class Apartamento {
 	
-
 	@Id
 	@Column(name = "ID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,8 +36,8 @@ public class Apartamento {
 	@Column(name = "Fracao", nullable = false)
 	private Character fracao;
 
-	@Column(name = "Username_Ocupante", nullable = true)
-	private String ocupante;
+	@Column(name = "ID_Ocupante", nullable = true)
+	private Integer ocupante;
 
 	@Column(name = "Agua", nullable = false)
 	private Double agua;
@@ -116,7 +108,7 @@ public class Apartamento {
 		return fracao;
 	}
 
-	public String getOcupante() {
+	public Integer getOcupante() {
 		return ocupante;
 	}
 
@@ -149,7 +141,7 @@ public class Apartamento {
 	}
 
 	public void setOcupante(User ocupante) {
-		this.ocupante = ocupante.getUsername();
+		this.ocupante = ocupante.getId();
 	}
 
 	public void setAgua(Double agua) {

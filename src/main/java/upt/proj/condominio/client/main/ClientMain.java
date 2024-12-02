@@ -560,7 +560,7 @@ public class ClientMain {
 					}
 				}while(!Checks.SeInteger(nApartamentoStr) || nApartamento == null);
    
-			   createApartamento(user,predio,tamanho, garagem, nResidentes, wc, andar, fracao, nApartamento);
+			   createApartamento(predio,tamanho, garagem, nResidentes, wc, andar, fracao, nApartamento);
 			}
 	}
 
@@ -572,10 +572,10 @@ public class ClientMain {
 		return predio;
 	}
 
-	public static void createApartamento(Conta user, Predio predio, Integer tamanho, Boolean garagem, Integer nResidentes, Integer wc, Integer andar, Character fracao, Integer nApartamento) { //FEITO
+	public static void createApartamento(Predio predio, Integer tamanho, Boolean garagem, Integer nResidentes, Integer wc, Integer andar, Character fracao, Integer nApartamento) { //FEITO
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		ApartamentoClientService apartamentoClientService = context.getBean(ApartamentoClientService.class);
-		apartamentoClientService.createApartamento(user.getId(),predio.getId(), tamanho, garagem, nResidentes, wc, andar, fracao, nApartamento);
+		apartamentoClientService.createApartamento(predio.getId(), tamanho, garagem, nResidentes, wc, andar, fracao, nApartamento);
 		context.close();
 
 	}
@@ -665,5 +665,33 @@ public class ClientMain {
 		PredioClientService predioClientService = context.getBean(PredioClientService.class);
 		predioClientService.createPredio(user.getId(),nomeP, zona, ntotalapart, animaisP);
 		context.close();
+	}
+
+	public static void entrarApart(Conta user) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Qual e o nome do predio onde o apartamento se encontra?");
+		String nomePredio = sc.nextLine();
+		Predio predio = readNomePredio(nomePredio);
+		if (predio == null) {
+			System.out.println("Predio nao encontrado.");
+		} else {
+			System.out.println("Qual e o numero do apartamento?");
+			String nApartamentoStr = sc.nextLine();
+			Integer nApartamento = null;
+			do {
+				if (Checks.SeInteger(nApartamentoStr)) {
+					nApartamento = Integer.parseInt(nApartamentoStr);
+				} else {
+					System.out.println("Por favor insira um numero inteiro.");
+				}
+			}while(!Checks.SeInteger(nApartamentoStr) || nApartamento == null);
+			Apartamento apartamento = readApartamento(predio, nApartamento);
+			if (apartamento == null) {
+				System.out.println("Apartamento nao encontrado.");
+			} else {
+				System.out.println("A entrar no apartamento...");
+				UI(apartamento);
+			}
+		}
 	}
 }

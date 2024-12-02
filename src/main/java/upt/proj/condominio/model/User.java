@@ -3,19 +3,20 @@ package upt.proj.condominio.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 @Entity
 @DiscriminatorValue("Morador")
-
 public class User extends Conta {
  
     @Column(name = "Idade", nullable = true)
     private int idade;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Gastos> gastos = new ArrayList<>();
-
    
     public User() {
         //JPA constructor 
@@ -24,6 +25,7 @@ public class User extends Conta {
     public User(String username, String email, String password, int idade) {
         super(username, email, password);
         this.idade = idade;
+        
     }
     
 

@@ -1,7 +1,9 @@
 package upt.proj.condominio.model;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Gastos")
@@ -15,6 +17,7 @@ public class Gastos {
 
 	@ManyToOne
 	@JoinColumn(name = "Id_User", nullable = false)
+	@JsonBackReference
 	private User user;
 
 	@Column(name = "Mes", nullable = false)
