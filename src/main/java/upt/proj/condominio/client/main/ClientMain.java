@@ -10,7 +10,9 @@ import upt.proj.condominio.client.config.AppConfig;
 import upt.proj.condominio.client.service.ApartamentoClientService;
 import upt.proj.condominio.client.service.ContaClientService;
 import upt.proj.condominio.client.service.GastosClientService;
+import upt.proj.condominio.client.service.MensagensClientService;
 import upt.proj.condominio.client.service.PredioClientService;
+import upt.proj.condominio.model.Mensagens;
 import upt.proj.condominio.model.Apartamento;
 import upt.proj.condominio.model.Conta;
 import upt.proj.condominio.model.DonoPredio;
@@ -350,7 +352,7 @@ public class ClientMain {
 					case "0" : System.out.println("A sair...");  break;
 					default : System.out.println("Opcao invalida...\n1- Registar predio\n2- Ver os seus predios\n3- Ver apartamentos no seu predio\n4 - Ver caixa de entrada\n5 - Enviar mensagem\n6 - Apagar mensagem\n0- Sair"); break;
 				}
-		} while (!resp.equals("4"));
+		} while (!resp.equals("0"));
 		
 	}
 
@@ -371,11 +373,11 @@ public class ClientMain {
 					case "1" : RegistarGastos(user); user = readUser(user.getUsername()); break;
 					case "2" : LerGastos(user); user = readUser(user.getUsername()); break;
 					case "3" : criarApartamento(user); user = readUser(user.getUsername()); break;
-					case "4" : 
+					case "4" : enviarMensagem(user); user = readUser(user.getUsername()); break;
 					case "0" : System.out.println("A sair..."); break;
 					default : System.out.println("Opcao invalida...\n1- Registar gastos\n2- Ver gastos\n3- Registar Apartamento\n4 - Ver caixa de entrada\n5 - Enviar mensagem\n6 - Apagar mensagem \n0- Sair"); break;
 				}
-		} while (!resp.equals("4"));
+		} while (!resp.equals("0"));
 	}
 
 	public static void UI_Empresa(Conta user) { //FEITO
@@ -672,6 +674,39 @@ public class ClientMain {
 		predioClientService.createPredio(user.getId(),nomeP, zona, ntotalapart, animaisP);
 		context.close();
 	}
+	
+	public static void enviarMensagem(Conta user) {
+		Scanner sc = new Scanner(System.in);
+		Conta sender = user;
+		String recipTemp;
+		do {
+		   System.out.println("Digite o username do utilizador a quem quer enviar mensagem: ");
+		   recipTemp = sc.nextLine();
+		    if (readUser(recipTemp) == null) {
+			    System.out.println("Utilizador não encontrado!");
+				recipTemp = "";
+		    }
+		} while (recipTemp.equals("") || (recipTemp.indexOf(" ") == 0));
+		Conta recipient = readConta(recipTemp);
+
+		String mensagem;
+		do {
+		   System.out.println("Digite a mensagem para enviar: ");
+		   mensagem = sc.nextLine();
+		} while (mensagem.equals("") || (mensagem.indexOf(" ") == 0));
+	   
+		
+		
+		createMensagem(sender.getUsername(),recipient.getUsername(),mensagem);
+			
+	}
+	public static void createMensagem(String sender, String recipient, String mensagem) {
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+		MensagensClientService mensagensClientService = context.getBean(MensagensClientService.class);
+		mensagensClientService.createMensagem(sender,recipient, mensagem);
+		context.close();
+	}
+	
 	public static Apartamento readApartamento(String username) { 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		ApartamentoClientService apartamentoClientService = context.getBean(ApartamentoClientService.class);
