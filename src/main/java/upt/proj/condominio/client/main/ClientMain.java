@@ -373,7 +373,7 @@ public class ClientMain {
 					case "1" : RegistarGastos(user); user = readUser(user.getUsername()); break;
 					case "2" : LerGastos(user); user = readUser(user.getUsername()); break;
 					case "3" : criarApartamento(user); user = readUser(user.getUsername()); break;
-					case "4" : enviarMensagem(user); user = readUser(user.getUsername()); break;
+					case "5" : enviarMensagem(user); user = readUser(user.getUsername()); break;
 					case "0" : System.out.println("A sair..."); break;
 					default : System.out.println("Opcao invalida...\n1- Registar gastos\n2- Ver gastos\n3- Registar Apartamento\n4 - Ver caixa de entrada\n5 - Enviar mensagem\n6 - Apagar mensagem \n0- Sair"); break;
 				}
