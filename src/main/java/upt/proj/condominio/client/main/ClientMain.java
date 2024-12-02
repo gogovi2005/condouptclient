@@ -22,7 +22,7 @@ import verificacoes.Checks;
 
 public class ClientMain {
 
-	public static void main(String[] args) { //FEITO
+	public static void main(String[] args) { 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
 		Scanner sc = new Scanner(System.in);
@@ -43,7 +43,7 @@ public class ClientMain {
 	}
 
 
-	public static void login() { //FEITO
+	public static void login() { 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Qual e o seu username ou email?");
 		String usermail = sc.nextLine();
@@ -339,7 +339,7 @@ public class ClientMain {
 	public static void UI_DonoPredio(Conta user) { 
 		user = readDonoPredio(user.getUsername());
 		Scanner sc = new Scanner(System.in);
-		System.out.println("1- Registar predio\n2- Ver os seus predios\n3- Ver apartamentos no seu predio\n4- Sair");
+		System.out.println("1- Registar predio\\n2- Ver os seus predios\\n3- Ver apartamentos no seu predio\\n4 - Ver caixa de entrada\\n5 - Enviar mensagem\\n6 - Apagar mensagem\\n0- Sair\"");
 		String resp;
 		do {
 			resp = sc.nextLine();
@@ -347,8 +347,8 @@ public class ClientMain {
 					case "1" : registarPredio(user); user = readDonoPredio(user.getUsername()); break;
 					case "2" : lerPredios(user); user = readDonoPredio(user.getUsername()); break;
 					case "3" : lerApartamentos(user); user = readDonoPredio(user.getUsername()); break;
-					case "4" : System.out.println("A sair...");  break;
-					default : System.out.println("Opcao invalida...\n1- Registar predio\n2- Ver os seus predios\n3- Ver apartamentos no seu predio\n4- Sair"); break;
+					case "0" : System.out.println("A sair...");  break;
+					default : System.out.println("Opcao invalida...\n1- Registar predio\n2- Ver os seus predios\n3- Ver apartamentos no seu predio\n4 - Ver caixa de entrada\n5 - Enviar mensagem\n6 - Apagar mensagem\n0- Sair"); break;
 				}
 		} while (!resp.equals("4"));
 		
@@ -371,8 +371,9 @@ public class ClientMain {
 					case "1" : RegistarGastos(user); user = readUser(user.getUsername()); break;
 					case "2" : LerGastos(user); user = readUser(user.getUsername()); break;
 					case "3" : criarApartamento(user); user = readUser(user.getUsername()); break;
-					case "4" : System.out.println("A sair..."); break;
-					default : System.out.println("Opcao invalida...\n1- Registar gastos\n2- Ver gastos\n3- Registar Apartamento \n4- Sair"); break;
+					case "4" : 
+					case "0" : System.out.println("A sair..."); break;
+					default : System.out.println("Opcao invalida...\n1- Registar gastos\n2- Ver gastos\n3- Registar Apartamento\n4 - Ver caixa de entrada\n5 - Enviar mensagem\n6 - Apagar mensagem \n0- Sair"); break;
 				}
 		} while (!resp.equals("4"));
 	}
@@ -674,7 +675,7 @@ public class ClientMain {
 	public static Apartamento readApartamento(String username) { 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		ApartamentoClientService apartamentoClientService = context.getBean(ApartamentoClientService.class);
-		Apartamento apartamento = ap«artamentoClientService.getApartamentoByUsername(username);
+		Apartamento apartamento = apartamentoClientService.getApartamentoByUsername(username);
 		context.close();
 		return apartamento;
 	}
