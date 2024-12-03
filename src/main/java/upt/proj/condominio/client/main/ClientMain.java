@@ -349,6 +349,8 @@ public class ClientMain {
 					case "1" : registarPredio(user); user = readDonoPredio(user.getUsername()); break;
 					case "2" : lerPredios(user); user = readDonoPredio(user.getUsername()); break;
 					case "3" : lerApartamentos(user); user = readDonoPredio(user.getUsername()); break;
+					case "4" : lerMensagens(user); user = readUser(user.getUsername()); break;
+					case "5" : enviarMensagem(user); user = readUser(user.getUsername()); break;
 					case "0" : System.out.println("A sair...");  break;
 					default : System.out.println("Opcao invalida...\n1- Registar predio\n2- Ver os seus predios\n3- Ver apartamentos no seu predio\n4 - Ver caixa de entrada\n5 - Enviar mensagem\n6 - Apagar mensagem\n0- Sair"); break;
 				}
@@ -373,6 +375,7 @@ public class ClientMain {
 					case "1" : RegistarGastos(user); user = readUser(user.getUsername()); break;
 					case "2" : LerGastos(user); user = readUser(user.getUsername()); break;
 					case "3" : criarApartamento(user); user = readUser(user.getUsername()); break;
+					case "4" : lerMensagens(user); user = readUser(user.getUsername()); break;
 					case "5" : enviarMensagem(user); user = readUser(user.getUsername()); break;
 					case "0" : System.out.println("A sair..."); break;
 					default : System.out.println("Opcao invalida...\n1- Registar gastos\n2- Ver gastos\n3- Registar Apartamento\n4 - Ver caixa de entrada\n5 - Enviar mensagem\n6 - Apagar mensagem \n0- Sair"); break;
@@ -705,6 +708,14 @@ public class ClientMain {
 		MensagensClientService mensagensClientService = context.getBean(MensagensClientService.class);
 		mensagensClientService.createMensagem(sender,recipient, mensagem);
 		context.close();
+	}  
+	
+	public static void lerMensagens(Conta user) {
+		Mensagens mensagens = new Mensagens();
+		List<Mensagens> recebidas = user.getMensagensRecebidas();
+		for (int i = 1; i == recebidas.size(); i++) {
+			mensagens.toString();
+		}
 	}
 	
 	public static Apartamento readApartamento(String username) { 

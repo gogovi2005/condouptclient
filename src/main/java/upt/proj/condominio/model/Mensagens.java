@@ -73,6 +73,12 @@ public class Mensagens {
     public void setRead(Boolean read) {
         this.read = read;
     }
+
+	@Override
+	public String toString() {
+		return "Mensagens [sender=" + sender + ", recipient=" + recipient + ", mensagem=" + mensagem + ", read=" + read
+				 + "]";
+	}
     
 
 }
